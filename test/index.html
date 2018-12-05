@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ungap WeakMap</title>
+  <script src="global.js"></script>
+  <script type="module">
+  import ET from '../esm/index.js';
+  window.ET = ET;
+  </script>
+  <script>
+  this.onload = function () {
+    if (!this.ET)
+      loadScript('../min.js', function () {
+        loadTest(EventTarget, 'CustomEvent!');
+      });
+    else {
+      console.assert(ET === EventTarget);
+      loadTest(EventTarget, 'CustomEvent!');
+    }
+  };
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
