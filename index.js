@@ -2,7 +2,7 @@
 var self = this || /* istanbul ignore next */ {};
 try {
   self.EventTarget = (new EventTarget).constructor;
-} catch(EventTarget) {
+} catch(_error) {
   (function (Object, wm) {
     var create = Object.create;
     var defineProperty = Object.defineProperty;
