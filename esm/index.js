@@ -33,6 +33,7 @@ try {
     define(proto, 'removeEventListener', function (type, listener) {
       for (var
         secret = wm.get(this),
+        /* istanbul ignore next */
         listeners = secret[type] || (secret[type] = []),
         i = 0, length = listeners.length; i < length; i++
       ) {
