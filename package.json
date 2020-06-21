@@ -1,6 +1,6 @@
 {
   "name": "@ungap/event-target",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An EventTarget polyfill",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
