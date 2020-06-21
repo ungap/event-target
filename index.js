@@ -1,5 +1,5 @@
 /*! (c) Andrea Giammarchi - ISC */
-var self = this || /* istanbul ignore next */ {};
+var self = this || {};
 try {
   self.EventTarget = (new EventTarget).constructor;
 } catch(EventTarget) {
