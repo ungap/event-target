@@ -4,6 +4,7 @@
   "description": "An EventTarget polyfill",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
+  "types": "./index.d.ts",
   "unpkg": "min.js",
   "scripts": {
     "build": "npm run cjs && npm run esm && npm run min && npm run test && npm run size",
