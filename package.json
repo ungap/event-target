@@ -10,7 +10,7 @@
     "build": "npm run cjs && npm run esm && npm run min && npm run test && npm run size",
     "cjs": "cat index.js | sed 's/var self.*/var self = {};/' > cjs/index.js && echo 'module.exports = self.EventTarget;' >> cjs/index.js",
     "esm": "cat index.js | sed 's/var self.*/var self = {};/' > esm/index.js && echo 'export default self.EventTarget;' >> esm/index.js",
-    "min": "uglifyjs index.js --support-ie8 --comments=/^!/ -c -m -o min.js",
+    "min": "terser index.js --comments=/^!/ -c -m -o min.js",
     "size": "cat index.js | wc -c && cat min.js | wc -c && gzip -c9 min.js | wc -c && cat min.js | brotli | wc -c",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc node test/index.js"
@@ -25,7 +25,7 @@
   "devDependencies": {
     "coveralls": "^3.1.0",
     "nyc": "^15.1.0",
-    "uglify-js": "^3.9.4"
+    "terser": "^4.8.0"
   },
   "repository": {
     "type": "git",
