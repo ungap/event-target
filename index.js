@@ -24,7 +24,7 @@ try {
       if (listeners) {
         define(event, 'target', this);
         define(event, 'currentTarget', this);
-        listeners.slice(0).forEach(dispatch, event);
+        listeners.slice(0).some(dispatch, event);
         delete event.currentTarget;
         delete event.target;
       }
@@ -66,6 +66,7 @@ try {
         info.listener.call(info.target, this);
       else
         info.listener.handleEvent(this);
+      return this._stopImmediatePropagationFlag;
     }
   }(Object, new WeakMap));
 }
