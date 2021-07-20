@@ -20,15 +20,11 @@ try {
     });
     define(proto, 'dispatchEvent', function (event) {
       var secret = wm.get(this);
-      if (secret[event.type]) {
-        var listeners = secret[event.type].slice(0);
+      var listeners = secret[event.type];
+      if (listeners) {
         define(event, 'target', this);
         define(event, 'currentTarget', this);
-        
-        // if an event listener invoke stopImmediatePropagation it should stop calling other listeners
-        for (var i = 0; i < listeners.length && !event._stopImmediatePropagationFlag; i++) {
-          dispatch.call(event, listeners[i]);
-        }
+        listeners.slice(0).some(dispatch, event);
         delete event.currentTarget;
         delete event.target;
       }
@@ -70,6 +66,7 @@ try {
         info.listener.call(info.target, this);
       else
         info.listener.handleEvent(this);
+      return this._stopImmediatePropagationFlag;
     }
   }(Object, new WeakMap));
 }
