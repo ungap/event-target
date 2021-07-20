@@ -3,6 +3,10 @@ try {
 } catch(e) {
   global.Event = function (type) {
     this.type = type;
+    this._stopImmediatePropagationFlag = false;
+    this.stopImmediatePropagation = () => {
+      this._stopImmediatePropagationFlag = true;
+    };
   };
 }
 
@@ -29,5 +33,12 @@ function test() {
     }
   });
   eventTarget.addEventListener('foo', () => console.log(2));
+  eventTarget.dispatchEvent(new Event('foo'));
+  eventTarget.addEventListener('foo', added, {once: true});
+  eventTarget.addEventListener('foo', (event) => {
+    console.log(2);
+    event.stopImmediatePropagation();
+  });
+  eventTarget.addEventListener('foo', () => console.log(3), {once: true});
   eventTarget.dispatchEvent(new Event('foo'));
 }
