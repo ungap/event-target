@@ -20,11 +20,15 @@ try {
     });
     define(proto, 'dispatchEvent', function (event) {
       var secret = wm.get(this);
-      var listeners = secret[event.type];
-      if (listeners) {
+      if (secret[event.type]) {
+        var listeners = secret[event.type].slice(0);
         define(event, 'target', this);
         define(event, 'currentTarget', this);
-        listeners.slice(0).forEach(dispatch, event);
+        
+        // if an event listener invoke stopImmediatePropagation it should stop calling other listeners
+        for (var i = 0; i < listeners.length && !event._stopImmediatePropagationFlag; i++) {
+          dispatch.call(event, listeners[i]);
+        }
         delete event.currentTarget;
         delete event.target;
       }
